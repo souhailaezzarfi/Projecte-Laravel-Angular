@@ -1,1 +1,52 @@
-<p>sessio-list works!</p>
+<div class="p-6 mt-16 bg-gray-950 min-h-screen">
+    <h1 class="text-3xl font-bold text-white mb-6">Llistat de sessions</h1>
+
+    <button [routerLink]="['/sessio-form']"
+        class="px-5 py-2 rounded-lg mb-4 text-white font-bold bg-[#FF5003] hover:bg-[#e64800] transition">
+        + Nou Sessió
+    </button>
+
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+
+        @for (sessio of sessions; track sessio.id) { <div class="rounded-xl overflow-hidden shadow-lg bg-[#1B2340] border border-white/10 
+                hover:scale-[1.02] hover:shadow-xl transition">
+
+            <!-- Header con badge -->
+            <div class="p-4 border-b border-white/10 flex justify-between items-center">
+                <h2 class="text-xl font-bold text-white">{{ sessio.titol }}</h2>
+                <span class="bg-[#FF5003] text-white text-sm px-3 py-1 rounded-full">
+                    {{ sessio.dataP }}
+                </span>
+            </div>
+
+            <div class="p-5 text-white space-y-2">
+
+                <p class="flex items-center gap-2">
+                    <i class="fa-solid fa-users text-[#FF5003]"></i>
+                    Places: {{ sessio.places }}
+                </p>
+
+                <p class="flex items-center gap-2">
+                    <i class="fa-solid fa-user text-[#FF5003]"></i>
+                    Entrenador: {{ sessio.entrenador.nom }} {{ sessio.entrenador.cognoms }}
+                </p>
+
+                <div class="flex gap-3 pt-4">
+                    <button [routerLink]="['/sessio-form', sessio.id]"
+                        class="px-4 py-2 rounded-lg text-white font-medium bg-[#FF5003] hover:bg-[#e64800] transition">
+                        Editar
+                    </button>
+                    <button (click)="deleteSessio(sessio.id)"
+                        class="px-4 py-2 rounded-lg text-white font-medium bg-gray-600 hover:bg-gray-500 transition">
+                        Eliminar
+                    </button>
+                </div>
+
+            </div>
+
+        </div>
+        }
+
+    </div>
+</div>

@@ -1,0 +1,71 @@
+<div class="p-6 mt-16 bg-gray-950 min-h-screen flex justify-center items-start">
+    <div class="bg-[#1B2340] rounded-xl p-8 w-full max-w-lg shadow-lg">
+
+        <h1 class="text-2xl font-bold text-white mb-6">
+            {{ esEdicio ? 'Editar Sessió' : 'Nova Sessió' }}
+        </h1>
+
+        <form [formGroup]="form" (ngSubmit)="onSubmit()">
+
+            <!-- Titol -->
+            <div class="mb-4">
+                <label class="text-white block mb-1">Títol</label>
+                <input formControlName="titol" type="text"
+                    class="w-full px-4 py-2 rounded-lg bg-gray-800 text-white border border-white/20 focus:outline-none focus:border-[#FF5003]">
+                @if (form.get('titol')?.invalid && form.get('titol')?.touched) {
+                <p class="text-red-400 text-sm mt-1">El títol és obligatori</p>
+                }
+            </div>
+
+            <!-- Data -->
+            <div class="mb-4">
+                <label class="text-white block mb-1">Data</label>
+                <input formControlName="dataP" type="date"
+                    class="w-full px-4 py-2 rounded-lg bg-gray-800 text-white border border-white/20 focus:outline-none focus:border-[#FF5003]">
+                @if (form.get('dataP')?.invalid && form.get('dataP')?.touched) {
+                <p class="text-red-400 text-sm mt-1">La data és obligatòria</p>
+                }
+            </div>
+
+            <!-- Places -->
+            <div class="mb-4">
+                <label class="text-white block mb-1">Places</label>
+                <input formControlName="places" type="number" min="1"
+                    class="w-full px-4 py-2 rounded-lg bg-gray-800 text-white border border-white/20 focus:outline-none focus:border-[#FF5003]">
+                @if (form.get('places')?.invalid && form.get('places')?.touched) {
+                <p class="text-red-400 text-sm mt-1">Les places són obligatòries i han de ser majors que 0</p>
+                }
+            </div>
+
+            <!-- Entrenador desplegable -->
+            <div class="mb-6">
+                <label class="text-white block mb-1">Entrenador</label>
+                <select formControlName="entrenador_id"
+                    class="w-full px-4 py-2 rounded-lg bg-gray-800 text-white border border-white/20 focus:outline-none focus:border-[#FF5003]">
+                    <option value="">Selecciona un entrenador</option>
+                    @for (entrenador of entrenadors; track entrenador.id) {
+                    <option [value]="entrenador.id">
+                        {{ entrenador.nom }} {{ entrenador.cognoms }}
+                    </option>
+                    }
+                </select>
+                @if (form.get('entrenador_id')?.invalid && form.get('entrenador_id')?.touched) {
+                <p class="text-red-400 text-sm mt-1">L'entrenador és obligatori</p>
+                }
+            </div>
+
+            <!-- Botons -->
+            <div class="flex gap-3">
+                <button type="submit"
+                    class="px-6 py-2 rounded-lg text-white font-bold bg-[#FF5003] hover:bg-[#e64800] transition">
+                    {{ esEdicio ? 'Guardar' : 'Crear' }}
+                </button>
+                <button type="button" (click)="router.navigate(['/sessio-list'])"
+                    class="px-6 py-2 rounded-lg text-white font-bold bg-gray-600 hover:bg-gray-500 transition">
+                    Cancel·lar
+                </button>
+            </div>
+
+        </form>
+    </div>
+</div>

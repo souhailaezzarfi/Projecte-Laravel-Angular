@@ -7,8 +7,7 @@ import { IEntrenador } from '../interfaces/ientrenador';
 })
 export class DadesEntrenadorsService {
 
-  private apiUrl = 'http://127.0.0.1:8000/api';
-
+  private apiUrl =  '/api';
   constructor(private http: HttpClient) {}
 
   getEntrenadors(): Observable<IEntrenador[]> {

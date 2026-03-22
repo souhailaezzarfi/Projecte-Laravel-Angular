@@ -71,9 +71,11 @@ class ApiController extends Controller
 
         if ($request->file('imatge')) {
             // Borra imagen anterior
-            $rutaAnterior = public_path(env('RUTA_IMATGES') . $entrenador->imatge);
-            if (file_exists($rutaAnterior)) {
-                unlink($rutaAnterior);
+            if ($entrenador->imatge) {
+                $rutaAnterior = public_path(env('RUTA_IMATGES') . $entrenador->imatge);
+                if (file_exists($rutaAnterior)) {
+                    unlink($rutaAnterior);
+                }
             }
 
             $file = $request->file('imatge');

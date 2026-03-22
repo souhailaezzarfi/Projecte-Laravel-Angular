@@ -8,7 +8,7 @@ import { ISessio } from '../interfaces/isessio';
 })
 export class DadesSessionsService {
 
-  private apiUrl = 'http://127.0.0.1:8000/api';
+  private apiUrl = '/api';
 
   constructor(private http: HttpClient) {}
 
